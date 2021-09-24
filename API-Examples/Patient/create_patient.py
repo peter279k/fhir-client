@@ -16,25 +16,37 @@ example_payload = {
     'resourceType': 'Patient',
     'identifier': [
         {
-            'system': 'http://system.lab.website',
+            'use': 'usual',
+            'type': {
+                'text': '身分證字號',
+            },
             'value': 'U123456789',
+            'assigner': {
+                'display': '內政部',
+            },
         }
     ],
+    'active': True,
     'name': [
         {
             'text': 'Peter Li',
-            'family': 'Li',
-            'given': ['Peter Li'],
         }
     ],
-    'contact': [{
-        'name': 'Peter Li',
-        'telecom': '0910123456',
-        'address': 'Taiwan, Taipei',
-        'organization': 'III',
-    }],
     'gender': 'male',
     'birthDate': '1993-06-30',
+    'address': [
+        {
+            'use': 'home',
+            'text': '105台北市松山區民生東路四段133號',
+        },
+    ],
+    'telecom': [
+        {
+            'use': 'home',
+            'system': 'phone',
+            'value': '0910123456',
+        }
+    ],
     'managingOrganization': {},
 }
 

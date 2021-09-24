@@ -6,7 +6,7 @@ headers = {
     'Accept': 'application/fhir+json',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
 }
-fhir_server_url = 'https://fhir.dicom.tw/fhir/Patient/66177'
+fhir_server_url = 'https://fhir.dicom.tw/fhir/Patient/66187'
 #fhir_server_url = 'https://hapi.fhir.tw/fhir/Patient/49953'
 
 response = requests.get(fhir_server_url, headers=headers)
