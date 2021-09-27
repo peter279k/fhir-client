@@ -8,3 +8,5 @@
 - Running `PATH=$PATH:/home/$USER/.local/bin` to add `pipenv` command to be under env variable PATH.
 - Running `pipenv install` to install required Python packages.
 - Running `pipenv shell` to enter Pipenv shell or `pipenv run python_file` to execute Python programs.
+- All Python programs are available on `API-Examples`.
+- Enjoy it!
