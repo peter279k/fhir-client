@@ -4,15 +4,58 @@ import requests
 import datetime
 
 
-fhir_server_url = 'https://hapi.fhir.tw/fhir/Bundle'
-#fhir_server_url = 'https://fhir.dicom.tw/fhir/Bundle'
+def get_organization_by_id(org_id):
+    fhir_server_url = 'https://fhir.dicom.tw/fhir/Organization/' + org_id
+    headers = {
+        'Accept': 'application/fhir+json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
+    }
+    response = requests.get(fhir_server_url, headers=headers)
+
+    return json.loads(response.text)
+
+def get_patient_by_id(patient_id):
+    fhir_server_url = 'https://fhir.dicom.tw/fhir/Patient/' + patient_id
+    headers = {
+        'Accept': 'application/fhir+json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
+    }
+    response = requests.get(fhir_server_url, headers=headers)
+
+    return json.loads(response.text)
+
+def get_immunization_by_id(immunization_id):
+    fhir_server_url = 'https://fhir.dicom.tw/fhir/Immunization/' + immunization_id
+    headers = {
+        'Accept': 'application/fhir+json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
+    }
+    response = requests.get(fhir_server_url, headers=headers)
+
+    return json.loads(response.text)
+
+def get_composition_by_id(composition_id):
+    fhir_server_url = 'https://fhir.dicom.tw/fhir/Composition/' + composition_id
+    headers = {
+        'Accept': 'application/fhir+json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
+    }
+    response = requests.get(fhir_server_url, headers=headers)
+
+    return json.loads(response.text)
+
+
+fhir_server_url = 'https://fhir.dicom.tw/fhir/Bundle'
+#fhir_server_url = 'https://hapi.fhir.tw/fhir/Bundle'
+
+headers = {
+    'Accept': 'application/fhir+json',
+    'Content-Type': 'application/fhir+json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.54 Safari/537.36',
+}
 
 period_start = '2010-09-24'
 period_end = '2020-09-24'
-
-type_coding_value = ['82593-5', 'LP6464-4', 'LP217198-3']
-type_coding_display = ['Immunization summary report', 'Nucleic acid amplification with probe detection', 'Rapid immunoassay']
-title = ['COVID-19 Vaccine', 'Test Certificate']
 
 example_payload = {
     'resourceType': 'Bundle',
@@ -20,51 +63,22 @@ example_payload = {
         {
             'system': 'https://www.vghtc.gov.tw',
             'value': str(uuid.uuid4()),
+            'period': {
+                'start': period_start,
+                'end': period_end,
+            },
         },
     ],
     'type': 'document',
-    'timestamp': datetime.datetime.isoformat() + '08:00',
+    'timestamp': datetime.datetime.now().isoformat().split('.')[0] + '+08:00',
     'entry': [
-        {
-            'resourceType': 'Composition',
-            'status': 'final',
-            'type': {
-                'coding': [
-                    {
-                        'system': 'http://loinc.org',
-                        'value': type_coding_value[0],
-                        'display': type_coding_display[0],
-                    },
-                ],
-            },
-            'subject': {
-                'reference': 'Patient/66176',
-                'display': '',
-            },
-            'date': datetime.datetime.isoformat() + '08:00',
-            'title': title[0],
-            'author': {
-                'reference': '',
-                'display': '',
-            },
-            'section': {
-                'entry': [
-                    {},
-                    {},
-                    {}
-                ]
-            }
-        },
-        {
-            
-        },
-        {
-            
-        },
-        {
-
-        },
+        get_composition_by_id('66197'),
+        get_organization_by_id('66189'),
+        get_patient_by_id('66187'),
+        get_immunization_by_id('66192'),
     ],
 }
 
+response = requests.post(fhir_server_url, headers=headers, data=json.dumps(example_payload))
 
+print(json.loads(response.text))
