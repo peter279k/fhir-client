@@ -49,7 +49,6 @@ example_payload = {
     'patient': {
         'reference': 'Patient/66187',
     },
-    'occurrenceDateTime': example_date,
     'protocolApplied': [
         {
             'doseNumberPositiveInt': 1,
