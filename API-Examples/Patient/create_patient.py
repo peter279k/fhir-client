@@ -15,33 +15,15 @@ example_payload = {
     'resourceType': 'Patient',
     'identifier': [
         {
-            'use': 'usual',
-            'type': {
-                'text': 'MI-TW',
-            },
-            'value': 'U123456789',
-            'assigner': {
-                'display': '內政部',
-            },
-        },
-        {
-            'use': 'usual',
-            'type': {
-               'text' : 'MI-TW',
-            },
-            'value': 'U23456789',
-            'assigner': {
-                'display': '外交部',
-            },
+            'system': 'https://www.dicom.org.tw/cs/identityCardNumber_tw',
+            'value': 'M123456789',
         },
     ],
-    'active': True,
     'name': [
         {
-            'text': 'Peter Li',
-        },
-        {
-            'text': 'Chun-Sheng, Li',
+            'text': '李小明',
+            'family': '李',
+            'given': ['小明'],
         },
     ],
     'gender': 'male',
@@ -52,7 +34,7 @@ example_payload = {
             'text': '105台北市松山區民生東路四段133號',
         },
         {
-            'country': 'TW (ISO 3166)',
+            'country': 'TW',
         },
     ],
     'telecom': [
@@ -62,8 +44,6 @@ example_payload = {
             'value': '0910123456',
         }
     ],
-    'managingOrganization': {
-    },
 }
 
 response = requests.post(fhir_server_url, headers=headers, data=json.dumps(example_payload))
