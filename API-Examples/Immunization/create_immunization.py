@@ -17,10 +17,9 @@ vaccine_identifiers = [
     '1119305005 COVID-19 antigen vaccine (SNOMED CT)',
 ]
 vaccine_codes = [
-    'AZ',
-    'Cov',
+    'CoV_AZ',
 ]
-displlay_vaccine_codes = [
+display_vaccine_codes = [
     'AZD1222',
     'BNT162b2',
     'mRNA-1273',
@@ -36,51 +35,53 @@ manufacturers = [
 example_date = datetime.datetime.now().strftime('%Y-%m-%d')
 example_payload = {
     'resourceType': 'Immunization',
+    'status': 'completed',
     'vaccineCode': {
         'coding': [
             {
                 'system': 'https://www.cdc.gov.tw',
                 'code': vaccine_codes[0],
+                'display': display_vaccine_codes[0],
             },
         ],
-        'display': displlay_vaccine_codes[0],
     },
-    'manufacturer': manufacturers[0],
     'patient': {
-        'reference': 'Patient/66187',
+        'reference': 'Patient/66215',
     },
-    'protocolApplied': [
-        {
-            'doseNumberPositiveInt': 1,
-        },
-        {
-            'seriesDosesPositiveInt': 2,
-        },
-        {
-            'targetDisease': {
-                'system': 'http://hl7.org/fhir/sid/icd-10',
-                'value': 'U07.1',
-            },
-        },
-    ],
-    'lotNumber': 'SA123456789',
-    'occurrence': '2021-08-30',
+    'occurrenceDateTime': '2021-08-30',
     'performer': [
         {
             'actor': {
                 'reference': 'Organization/66189',
-                'address': {
-                    'country': 'ISO 3166 (TW)',
-                },
             },
         },
         {
             'actor': {
-                'display': 'Practitioner/66188',
+                'display': '陳醫師',
             },
         },
     ],
-
+    'manufacturer': {
+        'display': manufacturers[0],
+    },
+    'lotNumber': 'CTMAV509-CDC',
+    'protocolApplied': [
+        {
+            'targetDisease': [
+                {
+                    'coding': [
+                        {
+                            'system': 'http://hl7.org/fhir/sid/icd-10',
+                            'code': 'U07.1',
+                            'display': 'COVID-19, virus identified',
+                        },
+                    ],
+                },
+            ],
+            'doseNumberPositiveInt': 1,
+            'seriesDosesPositiveInt': 2,
+        },
+    ],
 }
 
 response = requests.post(fhir_server_url, headers=headers, data=json.dumps(example_payload))

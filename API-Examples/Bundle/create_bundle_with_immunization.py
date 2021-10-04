@@ -12,7 +12,10 @@ def get_organization_by_id(org_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_patient_by_id(patient_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Patient/' + patient_id
@@ -22,7 +25,10 @@ def get_patient_by_id(patient_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_immunization_by_id(immunization_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Immunization/' + immunization_id
@@ -32,7 +38,10 @@ def get_immunization_by_id(immunization_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_composition_by_id(composition_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Composition/' + composition_id
@@ -42,7 +51,10 @@ def get_composition_by_id(composition_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 
 fhir_server_url = 'https://fhir.dicom.tw/fhir/Bundle'
@@ -62,7 +74,8 @@ example_payload = {
     'identifier': [
         {
             'system': 'https://www.vghtc.gov.tw',
-            'value': str(uuid.uuid4()),
+            # 'value': str(uuid.uuid4()),
+            'value': datetime.datetime.now().strftime('TW.123456789.%Y%m%d%H%M%S.001'),
             'period': {
                 'start': period_start,
                 'end': period_end,
@@ -72,10 +85,10 @@ example_payload = {
     'type': 'document',
     'timestamp': datetime.datetime.now().isoformat().split('.')[0] + '+08:00',
     'entry': [
-        get_composition_by_id('66197'),
-        get_organization_by_id('66189'),
-        get_patient_by_id('66187'),
-        get_immunization_by_id('66192'),
+        get_composition_by_id('66223'),
+        get_organization_by_id('66217'),
+        get_patient_by_id('66215'),
+        get_immunization_by_id('66220'),
     ],
 }
 

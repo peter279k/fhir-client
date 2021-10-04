@@ -20,9 +20,8 @@ example_payload = {
         },
     ],
     'name': '紫陽復健科診所',
-    'alias': '',
     'address': {
-        'country': 'TW (ISO 3166)',
+        'country': 'TW',
     },
 }
 

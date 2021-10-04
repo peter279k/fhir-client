@@ -22,34 +22,33 @@ example_payload = {
         'coding': [
             {
                 'system': 'http://loinc.org',
-                'value': type_coding_value[0],
+                'code': type_coding_value[0],
                 'display': type_coding_display[0],
             },
         ],
     },
     'subject': [
         {
-            'reference': 'Patient/66187',
-            'display': '',
+            'reference': 'Patient/66215',
         }
     ],
     'date': datetime.datetime.now().isoformat().split('.')[0] + '+08:00',
     'title': title[0],
     'author': [
         {
-            'reference': 'Practitioner/66188',
+            'reference': 'Organization/66217',
         },
     ],
     'section': {
         'entry': [
             {
-                'reference': 'Organization/66191',
+                'reference': 'Organization/66217',
             },
             {
-                'reference': 'Patient/66187',
+                'reference': 'Patient/66215',
             },
             {
-                'reference': 'Immunization/66192',
+                'reference': 'Immunization/66220',
             },
         ],
     },
