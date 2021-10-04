@@ -25,6 +25,11 @@ example_payload = {
             'family': '李',
             'given': ['小明'],
         },
+        {
+            'text': 'Sha-Ming Li',
+            'family': 'Li',
+            'given': ['Sha-Ming'],
+        },
     ],
     'gender': 'male',
     'birthDate': '1993-06-30',
