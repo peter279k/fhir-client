@@ -12,7 +12,10 @@ def get_organization_by_id(org_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_patient_by_id(patient_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Patient/' + patient_id
@@ -22,7 +25,10 @@ def get_patient_by_id(patient_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_observation_by_id(observation_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Observation/' + observation_id
@@ -32,7 +38,10 @@ def get_observation_by_id(observation_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 def get_composition_by_id(composition_id):
     fhir_server_url = 'https://fhir.dicom.tw/fhir/Composition/' + composition_id
@@ -42,7 +51,10 @@ def get_composition_by_id(composition_id):
     }
     response = requests.get(fhir_server_url, headers=headers)
 
-    return json.loads(response.text)
+    return {
+        'fullUrl': fhir_server_url,
+        'resource': json.loads(response.text),
+    }
 
 
 fhir_server_url = 'https://fhir.dicom.tw/fhir/Bundle'
