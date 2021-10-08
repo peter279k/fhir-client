@@ -59,13 +59,13 @@ example_payload = {
         },
         {
             'address': {
-                'country': 'TW (ISO 3166)',
+                'country': 'TW',
             },
         },
     ],
     'author': [
         {
-            'reference': 'Practitioner/66188',
+            'reference': 'Organization/66189',
         },
     ],
 }
