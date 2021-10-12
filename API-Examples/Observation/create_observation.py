@@ -38,7 +38,7 @@ observation_values = [
 
 example_payload = {
     'resourceType': 'Observation',
-    'id': str(uuid.uuidv4()),
+    'id': str(uuid.uuid4()),
     'status': 'final',
     'code': {
         'coding': [
