@@ -1,4 +1,5 @@
 import json
+import uuid
 import random
 import datetime
 import requests
@@ -37,33 +38,23 @@ observation_values = [
 
 example_payload = {
     'resourceType': 'Observation',
+    'id': str(uuid.uuidv4()),
+    'status': 'final',
     'code': {
         'coding': [
             {
                 'system': 'http://loinc.org',
-                'code': 'LP6464-4 Nucleic acid amplification with probe detection',
-                'display': 'LP217198-3 Rapid immunoassay',
+                'code': 'LP6464-4',
+                'display': 'Nucleic acid amplification with probe detection',
             },
         ],
     },
     'effectivePeriod': {
-        'start': start.strftime('%Y-%m-%d'),
-        'end': end.strftime('%Y-%m-%d'),
+        'start': start.isoformat().split('.')[0] + 'Z',
+        'end': end.isoformat().split('.')[0] + 'Z',
     },
-    'issued': end.strftime('%Y-%m-%d'),
-    'method': observation_methods[random.randint(0, len(observation_methods)-1)],
-    'value': observation_values[0],
+    'valueString': observation_values[0],
     'performer': [
-        {
-            'reference': 'Organization/66189',
-        },
-        {
-            'address': {
-                'country': 'TW',
-            },
-        },
-    ],
-    'author': [
         {
             'reference': 'Organization/66189',
         },
